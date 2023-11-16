@@ -1,16 +1,20 @@
 # cronometroeric
 
-A new Flutter project.
+Relazione sull'Applicazione Timer/Cronometro in Flutter
 
-## Getting Started
+Ho sviluppato un'applicazione di Timer/Cronometro utilizzando il Flutter. L'obiettivo principale del progetto era creare un timer che potesse tracciare il tempo trascorso e visualizzarlo in formato ore, minuti e secondi, mettendo un bottone che mi permettesse di metterlo in pausa, riprendere e resettare il timer. 
 
-This project is a starting point for a Flutter application.
+Logica dell’Applicazione
 
-A few resources to get you started if this is your first Flutter project:
+Utilizzo di Stream e StreamController: Ho utilizzato un StreamController denominato _tickController come componente centrale dell'applicazione. Questo controller genera eventi di "tick" a intervalli regolari (ogni secondo) che sono utilizzati per aggiornare il tempo trascorso.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Gestione del Tempo: Il tempo trascorso è mantenuto nella variabile _elapsedSeconds, espressa in secondi. La funzione formatTime converte questi secondi in un formato leggibile con ore, minuti e secondi.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Gestione del Timer: Ho implementato la funzione startTimer per avviare un timer periodico utilizzando Timer.periodic. Questo timer genera gli eventi di "tick" ogni secondo e aggiorna il tempo trascorso.
+
+Pausa e Ripresa del Timer: Ho introdotto una variabile _isPaused per tenere traccia dello stato di pausa del timer. Quando il timer è in pausa, i secondi non vengono incrementati. Le funzioni pauseTimer e resumeTimer modificano questa variabile per gestire la pausa e la ripresa.
+
+Reset del Timer: La funzione resetTimer reimposta il tempo trascorso a zero quando si preme il pulsante "Reset".
+
+Interfaccia Utente: Ho progettato l'interfaccia utente utilizzando il framework Flutter, con una barra dell'app che mostra il titolo, e una sezione centrale che visualizza il tempo trascorso e i pulsanti per controllare il timer.
+
