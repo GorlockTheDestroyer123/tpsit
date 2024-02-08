@@ -112,7 +112,8 @@ class _$PostDao extends PostDao {
   _$PostDao(
     this.database,
     this.changeListener,
-  )   : _postInsertionAdapter = InsertionAdapter(
+  )   : _queryAdapter = QueryAdapter(database),
+        _postInsertionAdapter = InsertionAdapter(
             database,
             'posts',
             (Post item) => <String, Object?>{
@@ -143,11 +144,22 @@ class _$PostDao extends PostDao {
 
   final StreamController<String> changeListener;
 
+  final QueryAdapter _queryAdapter;
+
   final InsertionAdapter<Post> _postInsertionAdapter;
 
   final UpdateAdapter<Post> _postUpdateAdapter;
 
   final DeletionAdapter<Post> _postDeletionAdapter;
+
+  @override
+  Future<List<Post>> getAllPosts() async {
+    return _queryAdapter.queryList('SELECT * FROM posts',
+        mapper: (Map<String, Object?> row) => Post(
+            id: row['id'] as int?,
+            name: row['name'] as String,
+            title: row['title'] as String));
+  }
 
   @override
   Future<void> insertPost(Post post) async {
@@ -169,7 +181,8 @@ class _$CommentDao extends CommentDao {
   _$CommentDao(
     this.database,
     this.changeListener,
-  )   : _commentInsertionAdapter = InsertionAdapter(
+  )   : _queryAdapter = QueryAdapter(database),
+        _commentInsertionAdapter = InsertionAdapter(
             database,
             'comments',
             (Comment item) => <String, Object?>{
@@ -200,11 +213,22 @@ class _$CommentDao extends CommentDao {
 
   final StreamController<String> changeListener;
 
+  final QueryAdapter _queryAdapter;
+
   final InsertionAdapter<Comment> _commentInsertionAdapter;
 
   final UpdateAdapter<Comment> _commentUpdateAdapter;
 
   final DeletionAdapter<Comment> _commentDeletionAdapter;
+
+  @override
+  Future<List<Comment>> getAllComments() async {
+    return _queryAdapter.queryList('SELECT * FROM comments',
+        mapper: (Map<String, Object?> row) => Comment(
+            id: row['id'] as int?,
+            postId: row['postId'] as int,
+            message: row['message'] as String));
+  }
 
   @override
   Future<void> insertComment(Comment comment) async {

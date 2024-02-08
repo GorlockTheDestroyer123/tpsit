@@ -5,7 +5,6 @@ import 'package:floor/floor.dart';
 class Post {
   @PrimaryKey(autoGenerate: true)
   final int? id;
-
   final String name;
   final String title;
 

@@ -4,6 +4,9 @@ import 'post.dart';
 
 @dao
 abstract class PostDao {
+  @Query('SELECT * FROM posts')
+  Future<List<Post>> getAllPosts();
+  
   @insert
   Future<void> insertPost(Post post);
 
