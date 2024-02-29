@@ -37,7 +37,7 @@ class PostWidget extends StatelessWidget {
       ));
     }
     if (widgets.isEmpty) {
-      widgets.add(const Text("no comments"));
+      widgets.add(const Text("no comments",selectionColor: Color.fromARGB(66, 101, 101, 101),));
     }
     widgets.add(TextButton(
         onPressed: () => addComment(this), child: const Text("Add comment")));
@@ -46,8 +46,8 @@ class PostWidget extends StatelessWidget {
     return ExpansionTile(
       leading: CircleAvatar(child: Text(post.text[0])),
       title: Text(post.text, style: _textStyle),
-      children: widgets,
       trailing: IconButton(onPressed: (){onPostUpdate(this);}, icon: const Icon(Icons.edit), color: Theme.of(context).primaryColor,),
+      children: widgets,
     );
   }
 
@@ -76,10 +76,9 @@ class CommentWidget extends StatelessWidget {
     return ListTile(
       onLongPress: ()=>onCommentUpdate(this),
       trailing: IconButton(onPressed: ()=>onCommentDelete(comment), icon: const Icon(Icons.delete), color: Theme.of(context).primaryColor),
-      leading: CircleAvatar(backgroundColor: Colors.blueGrey[50], child: Text("|", style: TextStyle(fontSize: 27, color: Theme.of(context).primaryColor)),),
+      leading: CircleAvatar(backgroundColor: const Color.fromARGB(255, 17, 56, 83), child: Text("-", style: TextStyle(fontSize: 27, color: Theme.of(context).primaryColor)),),
       title: Text(comment.text, style: _textStyle),
-      tileColor: Colors.blueGrey[50],
-
+      tileColor: Color.fromARGB(255, 17, 56, 83),
     );
   }
 }

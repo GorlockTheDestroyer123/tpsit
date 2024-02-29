@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'dao.dart';
 import 'database.dart';
 import 'model.dart';
@@ -20,7 +19,7 @@ class MyApp extends StatelessWidget {
       title: 'Posts and Comments',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(
-            primarySwatch: Colors.green, backgroundColor: Colors.white),
+            primarySwatch: Colors.blue, backgroundColor: Colors.white70),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Posts and Comments'),
