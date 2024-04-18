@@ -1,0 +1,104 @@
+openapi: 3.0.0
+info:
+  title: Car Management API
+  description: API per la gestione delle automobili nel database.
+  version: 1.0.0
+
+servers:
+  - url: 'http://localhost:8080/api'
+    description: Local server
+
+paths:
+  /cars:
+    get:
+      summary: Ottiene un elenco di tutte le macchine
+      responses:
+        '200':
+          description: Un elenco di macchine
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cars:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Car'
+        '500':
+          description: Errore interno del server
+
+    post:
+      summary: Crea una nuova macchina
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Car'
+      responses:
+        '201':
+          description: Macchina creata con successo
+        '400':
+          description: Informazioni insufficienti per creare la macchina
+        '500':
+          description: Errore del server
+
+  /cars/{id}:
+    put:
+      summary: Aggiorna una macchina esistente
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Car'
+      responses:
+        '200':
+          description: Macchina aggiornata con successo
+        '400':
+          description: Dati forniti non validi
+        '404':
+          description: Macchina non trovata
+        '500':
+          description: Errore del server
+
+    delete:
+      summary: Elimina una macchina
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Macchina eliminata con successo
+        '404':
+          description: Macchina non trovata
+        '500':
+          description: Errore del server
+
+components:
+  schemas:
+    Car:
+      type: object
+      required:
+        - id
+        - make
+        - name
+        - licenseplate
+      properties:
+        id:
+          type: integer
+        make:
+          type: string
+        name:
+          type: string
+        licenseplate:
+          type: string
